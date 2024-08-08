@@ -1,5 +1,7 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import { Button } from "~/components/ui/button";
 import { Skeleton } from "~/components/ui/skeleton";
 
 import { ValorantMapImage } from "~/components/valorant-map-image";
@@ -56,65 +58,76 @@ export default function HomePage() {
         height={100}
         alt="UNDERSCORE logo"
       />
-      <div className="grid w-full max-w-[60rem] grid-cols-1 gap-4">
-        <Week>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "5rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
-          </Match>
-        </Week>
-        <Week>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "5rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-          </Match>
-        </Week>
-        <Week>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
-          </Match>
-          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
-            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
-          </Match>
-        </Week>
+      <div className="flex w-full flex-col items-center gap-6">
+        <div className="flex gap-10 text-2xl font-bold">
+          <Button variant="outline" size="icon">
+            <ArrowLeftIcon />
+          </Button>
+          <p>Season 6</p>
+          <Button disabled variant="outline" size="icon">
+            <ArrowRightIcon />
+          </Button>
+        </div>
+        <div className="grid w-full max-w-[60rem] grid-cols-1 gap-4">
+          <Week>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "5rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+            </Match>
+          </Week>
+          <Week>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "5rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            </Match>
+          </Week>
+          <Week>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+              <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            </Match>
+            <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+              <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            </Match>
+          </Week>
+        </div>
       </div>
     </main>
   );
