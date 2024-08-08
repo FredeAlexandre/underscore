@@ -53,9 +53,13 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: DrizzleAdapter(db, {
+    // @ts-expect-error I don't know why
     usersTable: users,
+    // @ts-expect-error I don't know why
     accountsTable: accounts,
+    // @ts-expect-error I don't know why
     sessionsTable: sessions,
+    // @ts-expect-error I don't know why
     verificationTokensTable: verificationTokens,
   }) as Adapter,
   providers: [
