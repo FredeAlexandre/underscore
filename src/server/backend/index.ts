@@ -35,16 +35,21 @@ export const app = new Elysia({ prefix: "/backend" })
       if (typeof id == "number") {
         if (id >= data.data.length)
           return error(400, `Season ${id} doesn't exist`);
-        return { no: id, ...data.data[id] };
+        return { no: id, last: id == data.data.length - 1, ...data.data[id] };
       } else {
         if (id == "last")
           return {
             no: data.data.length - 1,
+            last: true,
             ...data.data[data.data.length - 1],
           };
         const seasonId = data.data.findIndex((s) => s.id === id);
         if (seasonId == -1) return error(400, `Season ${id} doesn't exist`);
-        return { no: seasonId, ...data.data[seasonId] };
+        return {
+          no: seasonId,
+          last: seasonId == data.data.length - 1,
+          ...data.data[seasonId],
+        };
       }
     },
     {

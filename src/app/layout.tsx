@@ -21,9 +21,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "bg-background min-h-screen font-sans antialiased",
+        "min-h-screen bg-background font-sans antialiased",
         GeistSans.variable,
       )}
+      suppressHydrationWarning
     >
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">

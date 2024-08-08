@@ -5,19 +5,32 @@ const Map = z.object({
   id: z.string(),
 });
 
+export type Map = z.infer<typeof Map>;
+
 const MapSelection = z.object({
   type: z.string(),
   maps: z.array(Map),
 });
 
+export type MapSelection = z.infer<typeof MapSelection>;
+
+const EventType = z
+  .literal("SCRIM")
+  .or(z.literal("LEAGUE"))
+  .or(z.literal("TOURNAMENT"));
+
+export type EventType = z.infer<typeof EventType>;
+
 const Event = z.object({
   id: z.string().uuid(),
-  type: z.string(),
+  type: EventType,
   starts_at: z.string(),
   ends_at: z.string(),
   map_selection: MapSelection,
   points_required_to_participate: z.number(),
 });
+
+export type Event = z.infer<typeof Event>;
 
 const ScheduledEvent = z.object({
   event_id: z.string(),
@@ -25,6 +38,8 @@ const ScheduledEvent = z.object({
   ends_at: z.string(),
   conference: z.string(),
 });
+
+export type ScheduledEvent = z.infer<typeof ScheduledEvent>;
 
 const PremierSeason = z.object({
   id: z.string().uuid(),
@@ -37,6 +52,8 @@ const PremierSeason = z.object({
   events: z.array(Event),
   scheduled_events: z.array(ScheduledEvent),
 });
+
+export type PremierSeason = z.infer<typeof PremierSeason>;
 
 const HenrikPremierSeasonResponse = z.object({
   status: z.number(),
