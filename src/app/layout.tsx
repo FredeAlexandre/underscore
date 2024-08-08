@@ -2,7 +2,11 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+
 import { cn } from "~/lib/utils";
+
+import { ThemeProvider } from "~/components/theme-provider";
+import { QueryClientProvider } from "~/components/query-client-provider";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -21,7 +25,11 @@ export default function RootLayout({
         GeistSans.variable,
       )}
     >
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+          <QueryClientProvider>{children}</QueryClientProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

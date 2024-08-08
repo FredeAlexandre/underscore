@@ -1,7 +1,8 @@
 import { Elysia, t } from "elysia";
+import { data } from "./hard_coded_henrik_data";
 
 export const app = new Elysia({ prefix: "/backend" })
-  .get("/", () => "hello Next")
+  .get("/premier", data)
   .post("/", ({ body }) => body, {
     body: t.Object({
       name: t.String(),

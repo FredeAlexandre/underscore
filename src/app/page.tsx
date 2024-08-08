@@ -1,36 +1,120 @@
-import Link from "next/link";
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import { Skeleton } from "~/components/ui/skeleton";
+
+import { ValorantMapImage } from "~/components/valorant-map-image";
+import { ValorantMapName } from "~/components/valorant-map-name";
+
+export function Match({
+  children,
+  mapUuid,
+}: {
+  children?: React.ReactNode;
+  mapUuid: string;
+}) {
+  return (
+    <div className="flex w-full items-center justify-between rounded-lg border p-2">
+      <div className="flex items-center gap-2">
+        <ValorantMapImage mapUuid={mapUuid} />
+        <div className="space-y-2">
+          <ValorantMapName mapUuid={mapUuid} />
+          <Skeleton className="h-[10px] w-[80px] rounded-full" />
+        </div>
+      </div>
+      <div className="relative">{children}</div>
+    </div>
+  );
+}
+
+export function PlayerProfilePicture({ style }: { style?: CSSProperties }) {
+  return (
+    <Skeleton
+      style={style}
+      className="absolute top-1/2 h-9 w-9 -translate-y-1/2 rounded-full"
+    />
+  );
+}
+
+export function Week({ children }: { children?: React.ReactNode }) {
+  return (
+    <div className="flex w-full flex-col gap-1">
+      <div className="flex justify-between">
+        <h2 className="font-bold">Week #1</h2>
+        <p className="text-muted-foreground">16 Juin 2024 → 23 Juin 2024</p>
+      </div>
+      <div className="grid w-full grid-cols-1 gap-2">{children}</div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
+    <main className="container flex flex-col items-center gap-20 px-4 py-20">
+      <Image
+        src="/underscore.svg"
+        width={500}
+        height={100}
+        alt="UNDERSCORE logo"
+      />
+      <div className="grid w-full max-w-[60rem] grid-cols-1 gap-4">
+        <Week>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "5rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+          </Match>
+        </Week>
+        <Week>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "3.75rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "5rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 12, right: "2.5rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+          </Match>
+        </Week>
+        <Week>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+            <PlayerProfilePicture style={{ zIndex: 11, right: "1.25rem" }} />
+          </Match>
+          <Match mapUuid="7eaecc1b-4337-bbf6-6ab9-04b8f06b3319">
+            <PlayerProfilePicture style={{ zIndex: 10, right: "0rem" }} />
+          </Match>
+        </Week>
       </div>
     </main>
   );
