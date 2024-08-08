@@ -6,6 +6,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 
 import { ValorantMapImage } from "~/components/valorant-map-image";
 import { ValorantMapName } from "~/components/valorant-map-name";
+import { api } from "~/server/backend";
 
 export function Match({
   children,
@@ -49,7 +50,11 @@ export function Week({ children }: { children?: React.ReactNode }) {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const response = await api.backend.premier
+    .season({ id: "last" })
+    .get({ query: { region: "eu" } });
+
   return (
     <main className="container flex flex-col items-center gap-20 px-4 py-20">
       <Image
@@ -63,7 +68,7 @@ export default function HomePage() {
           <Button variant="outline" size="icon">
             <ArrowLeftIcon />
           </Button>
-          <p>Season 6</p>
+          <p>Season {response.data.no + 1}</p>
           <Button disabled variant="outline" size="icon">
             <ArrowRightIcon />
           </Button>

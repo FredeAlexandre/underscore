@@ -9,7 +9,7 @@ export const app = new Elysia({ prefix: "/backend" })
     ({ query, error }) => {
       if (query.region != "eu")
         return error(400, `Region ${query.region} has no data implemented yet`);
-      return data;
+      return data.data.map((s, i) => ({ no: i, ...s }));
     },
     {
       query: t.Object({
@@ -35,12 +35,16 @@ export const app = new Elysia({ prefix: "/backend" })
       if (typeof id == "number") {
         if (id >= data.data.length)
           return error(400, `Season ${id} doesn't exist`);
-        return data.data[id];
+        return { no: id, ...data.data[id] };
       } else {
-        if (id == "last") return data.data[data.data.length - 1];
-        const season = data.data.find((s) => s.id === id);
-        if (!season) return error(400, `Season ${id} doesn't exist`);
-        return season;
+        if (id == "last")
+          return {
+            no: data.data.length - 1,
+            ...data.data[data.data.length - 1],
+          };
+        const seasonId = data.data.findIndex((s) => s.id === id);
+        if (seasonId == -1) return error(400, `Season ${id} doesn't exist`);
+        return { no: seasonId, ...data.data[seasonId] };
       }
     },
     {
@@ -61,12 +65,7 @@ export const app = new Elysia({ prefix: "/backend" })
         ),
       }),
     },
-  )
-  .post("/", ({ body }) => body, {
-    body: t.Object({
-      name: t.String(),
-    }),
-  });
+  );
 
 export type App = typeof app;
 
