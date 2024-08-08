@@ -11,6 +11,9 @@ importers:
       '@auth/drizzle-adapter':
         specifier: ^1.1.0
         version: 1.4.2
+      '@elysiajs/eden':
+        specifier: ^1.1.2
+        version: 1.1.2(elysia@1.1.5(@sinclair/typebox@0.33.0)(typescript@5.5.4))
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.52.2(react@18.3.1))
@@ -255,6 +258,11 @@ packages:
   '@babel/runtime@7.25.0':
     resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
     engines: {node: '>=6.9.0'}
+
+  '@elysiajs/eden@1.1.2':
+    resolution: {integrity: sha512-SNMW+7oN97POOq2r5rXBYXa9dBbqIcSVZ+0fFL0KnMmD3OKfhjuXzbGeeimRCMDVQr/ANvdvbqkQ+fJx1xOEjg==}
+    peerDependencies:
+      elysia: '>= 1.1.0'
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
@@ -3606,6 +3614,10 @@ snapshots:
   '@babel/runtime@7.25.0':
     dependencies:
       regenerator-runtime: 0.14.1
+
+  '@elysiajs/eden@1.1.2(elysia@1.1.5(@sinclair/typebox@0.33.0)(typescript@5.5.4))':
+    dependencies:
+      elysia: 1.1.5(@sinclair/typebox@0.33.0)(typescript@5.5.4)
 
   '@esbuild-kit/core-utils@3.3.2':
     dependencies:
