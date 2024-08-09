@@ -28,7 +28,7 @@ export default async function HomePage() {
     fetch: { cache: "no-cache" },
   });
 
-  const data = response.data as {
+  const data = (response.data ?? []) as {
     id: string;
     name: string;
     start: string;
