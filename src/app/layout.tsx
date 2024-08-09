@@ -7,6 +7,7 @@ import { cn } from "~/lib/utils";
 
 import { ThemeProvider } from "~/components/theme-provider";
 import { QueryClientProvider } from "~/components/query-client-provider";
+import { AuthSessionProvider } from "~/components/auth-session-provider";
 
 export const metadata: Metadata = {
   title: "UNDERSCORE",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -28,7 +29,9 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-          <QueryClientProvider>{children}</QueryClientProvider>
+          <QueryClientProvider>
+            <AuthSessionProvider>{children}</AuthSessionProvider>
+          </QueryClientProvider>
         </ThemeProvider>
       </body>
     </html>

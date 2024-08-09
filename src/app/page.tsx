@@ -14,6 +14,7 @@ import type {
   PremierSeason,
   EventType,
 } from "~/server/backend/hard_coded_henrik_data";
+import { AuthButton } from "./_components/auth-button";
 
 export function Match({
   children,
@@ -195,6 +196,7 @@ export default async function HomePage() {
         alt="UNDERSCORE logo"
       />
       <div className="flex w-full flex-col items-center gap-6">
+        <AuthButton />
         <div className="flex gap-10 text-2xl font-bold">
           <Button disabled={data.no == 0} variant="outline" size="icon">
             <ArrowLeftIcon />
