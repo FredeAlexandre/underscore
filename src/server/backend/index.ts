@@ -1,73 +1,53 @@
 import { Elysia, t } from "elysia";
 import { treaty } from "@elysiajs/eden";
-import { data } from "./hard_coded_henrik_data";
+import { eq } from "drizzle-orm";
+
+import { db } from "~/server/db";
+import { events } from "~/server/db/schema";
+
 import { env } from "~/env";
 
 export const app = new Elysia({ prefix: "/backend" })
+  .get("/events", async () => {
+    return await db.select().from(events);
+  })
   .get(
-    "/premier/seasons",
-    ({ query, error }) => {
-      if (query.region != "eu")
-        return error(400, `Region ${query.region} has no data implemented yet`);
-      return data.data.map((s, i) => ({ no: i, ...s }));
-    },
-    {
-      query: t.Object({
-        region: t.Union(
-          [
-            t.Literal("eu"),
-            t.Literal("na"),
-            t.Literal("latam"),
-            t.Literal("br"),
-            t.Literal("ap"),
-            t.Literal("kr"),
-          ],
-          { default: "eu" },
-        ),
-      }),
-    },
-  )
-  .get(
-    "/premier/season/:id",
-    ({ query, error, params: { id } }) => {
-      if (query.region != "eu")
-        return error(400, `Region ${query.region} has no data implemented yet`);
-      if (typeof id == "number") {
-        if (id >= data.data.length)
-          return error(400, `Season ${id} doesn't exist`);
-        return { no: id, last: id == data.data.length - 1, ...data.data[id] };
-      } else {
-        if (id == "last")
-          return {
-            no: data.data.length - 1,
-            last: true,
-            ...data.data[data.data.length - 1],
-          };
-        const seasonId = data.data.findIndex((s) => s.id === id);
-        if (seasonId == -1) return error(400, `Season ${id} doesn't exist`);
-        return {
-          no: seasonId,
-          last: seasonId == data.data.length - 1,
-          ...data.data[seasonId],
-        };
-      }
+    "/event/:id",
+    async ({ params: { id }, error }) => {
+      const result = await db
+        .select()
+        .from(events)
+        .where(eq(events.id, id))
+        .limit(1);
+
+      if (result.length == 0 || !result[0])
+        return error(400, `Event with ${id} not found`);
+      return result[0];
     },
     {
       params: t.Object({
-        id: t.Union([t.Number(), t.Literal("last"), t.String()]),
+        id: t.String(),
       }),
+    },
+  )
+  .post(
+    "/event",
+    async ({ error, query: { name, start, end, include_time, thumbnail } }) => {
+      const result = await db
+        .insert(events)
+        .values({ name, start, end, include_time, thumbnail })
+        .returning();
+      if (result.length == 0 || !result[0])
+        return error(500, `Somehting went wrong with database`);
+      return result[0];
+    },
+    {
       query: t.Object({
-        region: t.Union(
-          [
-            t.Literal("eu"),
-            t.Literal("na"),
-            t.Literal("latam"),
-            t.Literal("br"),
-            t.Literal("ap"),
-            t.Literal("kr"),
-          ],
-          { default: "eu" },
-        ),
+        name: t.String(),
+        start: t.Date(),
+        end: t.Date(),
+        include_time: t.Boolean(),
+        thumbnail: t.String(),
       }),
     },
   );
