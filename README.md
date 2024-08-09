@@ -17,19 +17,25 @@ cd underscore
 pnpm install
 ```
 
-3. Start the database
+3. Copy Environement variables example file
+
+```sh
+cp .env.example .env
+```
+
+4. Start the database
 
 ```sh
 pnpm db:start
 ```
 
-4. Create tables
+5. Create tables
 
 ```sh
 pnpm db:push
 ```
 
-5. Seed the database of fake data
+6. Seed the database of fake data
 
 > See /src/server/db/seed.ts to edit the information added to the database as fake data
 
@@ -37,13 +43,13 @@ pnpm db:push
 pnpm db:seed
 ```
 
-6. Start the Next.JS server
+7. Start the Next.JS server
 
 ```sh
 pnpm dev
 ```
 
-7. (Optional) Start the Drizzle Studio
+8. (Optional) Start the Drizzle Studio
 
 ```sh
 pnpm db:studio
