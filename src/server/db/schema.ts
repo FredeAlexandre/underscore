@@ -39,7 +39,7 @@ export const valorantMaps = createTable("valorant-map", {
 });
 
 export const valorantMapsRelations = relations(valorantMaps, ({ many }) => ({
-  mapsToMatches: many(premierMatches),
+  mapsToMatches: many(premierMatchesToValorantMaps),
 }));
 
 export const premierSeasons = createTable("premier-seasons", {
@@ -111,7 +111,7 @@ export const premierMatchesRelations = relations(
   premierMatches,
   ({ many, one }) => ({
     events: many(premierEvents),
-    maps: many(valorantMaps),
+    maps: many(premierMatchesToValorantMaps),
     season: one(premierSeasons, {
       fields: [premierMatches.premierSeasonId],
       references: [premierSeasons.id],
@@ -122,7 +122,7 @@ export const premierMatchesRelations = relations(
 export const premierMatchesToValorantMaps = createTable(
   "premier-matches-to-valorants-maps",
   {
-    valorantMapId: integer("valorant_map_id")
+    valorantMapId: uuid("valorant_map_id")
       .notNull()
       .references(() => valorantMaps.id),
     premierMatchId: integer("premier_match_id")
