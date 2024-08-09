@@ -29,7 +29,7 @@ export const valorantRegions = createTable("valorant-regions", {
 export const valorantRegionsRelations = relations(
   valorantRegions,
   ({ many }) => ({
-    enrollments: many(premierEnrollments),
+    sessionEnrollments: many(premierSessionEnrollments),
     events: many(premierEvents),
   }),
 );
@@ -49,13 +49,13 @@ export const premierSeasons = createTable("premier-seasons", {
 export const premierSeasonsRelations = relations(
   premierSeasons,
   ({ many }) => ({
-    enrollments: many(premierEnrollments),
+    sessionEnrollments: many(premierSessionEnrollments),
     events: many(premierEvents),
     macthes: many(premierMatches),
   }),
 );
 
-export const premierEnrollments = createTable(
+export const premierSessionEnrollments = createTable(
   "premier-enrollments",
   {
     valorantRegionId: integer("valorant_region_id")
@@ -72,15 +72,15 @@ export const premierEnrollments = createTable(
   }),
 );
 
-export const premierEnrollmentsRelations = relations(
-  premierEnrollments,
+export const premierSessionEnrollmentsRelations = relations(
+  premierSessionEnrollments,
   ({ one }) => ({
     region: one(valorantRegions, {
-      fields: [premierEnrollments.valorantRegionId],
+      fields: [premierSessionEnrollments.valorantRegionId],
       references: [valorantRegions.id],
     }),
     season: one(premierSeasons, {
-      fields: [premierEnrollments.premierSeasonId],
+      fields: [premierSessionEnrollments.premierSeasonId],
       references: [premierSeasons.id],
     }),
   }),
@@ -178,26 +178,11 @@ export const premierEventsRelations = relations(premierEvents, ({ one }) => ({
   }),
 }));
 
-export const posts = createTable(
-  "post",
-  {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
-    createdById: varchar("created_by", { length: 255 })
-      .notNull()
-      .references(() => users.id),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date(),
-    ),
-  },
-  (example) => ({
-    createdByIdIdx: index("created_by_idx").on(example.createdById),
-    nameIndex: index("name_idx").on(example.name),
-  }),
-);
+export const premierTeams = createTable("premier-teams", {
+  id: uuid("id").primaryKey(),
+  name: varchar("name"),
+  tag: varchar("tag"),
+});
 
 export const users = createTable("user", {
   id: varchar("id", { length: 255 })
