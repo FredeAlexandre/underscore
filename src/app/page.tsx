@@ -20,13 +20,33 @@ import {
 import { api } from "~/server/backend";
 import { AuthButton } from "./_components/auth-button";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
+import { parseISO } from "date-fns";
 
 export function PlayerProfilePicture({ style }: { style?: CSSProperties }) {
   return <Skeleton style={style} className="h-9 w-9 rounded-full" />;
 }
 
 export default async function HomePage() {
-  const response = await api.backend.events.get();
+  const response = await api.backend.events.get({
+    fetch: { cache: "no-cache" },
+  });
+
+  const data = response.data as {
+    id: string;
+    name: string;
+    start: string;
+    end: string;
+    include_time: boolean;
+    thumbnail: string;
+  }[];
+
+  const formated = data.map((item) => ({
+    ...item,
+    title: item.name,
+    start: parseISO(item.start),
+    end: parseISO(item.end),
+  }));
+
   return (
     <main className="container flex flex-col items-center gap-20 px-4 py-20">
       <Image
@@ -44,28 +64,30 @@ export default async function HomePage() {
               <PlannerBlockTimespan>20 → 21</PlannerBlockTimespan>
             </PlannerBlockHeader>
             <PlannerBlockContent>
-              <PlannerEvent>
-                <PlannerEventThumbnail
-                  src="https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png"
-                  alt="Ascent"
-                />
-                <PlannerEventMetadata title="Ascent" start={new Date()} />
-                <PlannerEventRightSide>
-                  <PlayerProfilePicture />
-                  <PlayerProfilePicture />
-                  <PlayerProfilePicture />
-                  <PlayerProfilePicture />
-                  <PlayerProfilePicture />
-                  <div className="flex gap-1 pl-2">
-                    <Button variant="ghost" size="icon">
-                      <CheckIcon />
-                    </Button>
-                    <Button disabled variant="ghost" size="icon">
-                      <Cross2Icon />
-                    </Button>
-                  </div>
-                </PlannerEventRightSide>
-              </PlannerEvent>
+              {formated.map((event) => (
+                <PlannerEvent key={event.id}>
+                  <PlannerEventThumbnail
+                    src={event.thumbnail}
+                    alt={event.name}
+                  />
+                  <PlannerEventMetadata {...event} />
+                  <PlannerEventRightSide>
+                    <PlayerProfilePicture />
+                    <PlayerProfilePicture />
+                    <PlayerProfilePicture />
+                    <PlayerProfilePicture />
+                    <PlayerProfilePicture />
+                    <div className="flex gap-1 pl-2">
+                      <Button variant="ghost" size="icon">
+                        <CheckIcon />
+                      </Button>
+                      <Button disabled variant="ghost" size="icon">
+                        <Cross2Icon />
+                      </Button>
+                    </div>
+                  </PlannerEventRightSide>
+                </PlannerEvent>
+              ))}
             </PlannerBlockContent>
           </PlannerBlock>
         </Planner>
