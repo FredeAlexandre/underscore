@@ -1,9 +1,7 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
 import React from "react";
 
 import { Button } from "~/components/ui/button";
-import { Skeleton } from "~/components/ui/skeleton";
 import {
   Planner,
   PlannerBlock,
@@ -19,12 +17,11 @@ import {
 
 import { api } from "~/server/backend";
 import { AuthButton } from "./_components/auth-button";
+import { PlayerProfilePicture } from "./_components/player-profile-picture";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { parseISO } from "date-fns";
 
-export function PlayerProfilePicture({ style }: { style?: CSSProperties }) {
-  return <Skeleton style={style} className="h-9 w-9 rounded-full" />;
-}
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const response = await api.backend.events.get({
