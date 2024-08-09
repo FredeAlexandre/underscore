@@ -1,5 +1,6 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  boolean,
   index,
   integer,
   pgTableCreator,
@@ -7,18 +8,59 @@ import {
   text,
   timestamp,
   varchar,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
 import { nanoid } from "nanoid";
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
 export const createTable = pgTableCreator((name) => `underscore_${name}`);
+
+export const events = createTable("events", {
+  id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+  name: varchar("name").notNull(),
+  start: timestamp("start", { withTimezone: true }).notNull(),
+  end: timestamp("end", { withTimezone: true }),
+  include_time: boolean("include_time"),
+  thumbnail: varchar("image", { length: 255 }),
+});
+
+export const eventsRelations = relations(events, ({ many }) => ({
+  invitations: many(eventInvitations),
+}));
+
+export const eventInvitationStatus = pgEnum("event_invitation_status", [
+  "none",
+  "accepted",
+  "refused",
+]);
+
+export const eventInvitations = createTable("event_invitations", {
+  eventId: varchar("event_id", { length: 255 })
+    .notNull()
+    .references(() => events.id),
+  userId: varchar("user_id", { length: 255 })
+    .notNull()
+    .references(() => users.id),
+  status: eventInvitationStatus("status").default("none"),
+});
+
+export const eventInvitationsRelations = relations(
+  eventInvitations,
+  ({ one }) => ({
+    event: one(events, {
+      fields: [eventInvitations.eventId],
+      references: [events.id],
+    }),
+    user: one(users, {
+      fields: [eventInvitations.userId],
+      references: [users.id],
+    }),
+  }),
+);
 
 export const users = createTable("user", {
   id: varchar("id", { length: 255 })
