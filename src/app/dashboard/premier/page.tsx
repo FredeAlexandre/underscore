@@ -16,8 +16,8 @@ import {
 } from "~/components/planner";
 
 import { api } from "~/server/backend";
-import { LogoutButton } from "./_components/logout-button";
-import { PlayerProfilePicture } from "./_components/player-profile-picture";
+import { LogoutButton } from "../../_components/logout-button";
+import { PlayerProfilePicture } from "../../_components/player-profile-picture";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { parseISO } from "date-fns";
 import { redirect } from "next/navigation";
@@ -25,7 +25,7 @@ import { getServerAuthSession } from "~/server/auth";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
+export default async function PremierPage() {
   const session = await getServerAuthSession();
 
   if (!session || !session.user) {
@@ -54,14 +54,7 @@ export default async function HomePage() {
 
   return (
     <main className="container flex flex-col items-center gap-20 px-4 py-20">
-      <Image
-        src="/underscore.svg"
-        width={500}
-        height={100}
-        alt="UNDERSCORE logo"
-      />
       <div className="flex w-full flex-col items-center gap-6">
-        <LogoutButton />
         <Planner>
           <PlannerBlock>
             <PlannerBlockHeader>

@@ -22,12 +22,12 @@ export default async function RootLayout({
     <html
       lang="en"
       className={cn(
-        "min-h-screen bg-background font-sans antialiased",
+        "min-h-screen font-sans antialiased",
         GeistSans.variable,
       )}
       suppressHydrationWarning
     >
-      <body>
+      <body className="h-screen">
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <QueryClientProvider>
             <AuthSessionProvider>{children}</AuthSessionProvider>

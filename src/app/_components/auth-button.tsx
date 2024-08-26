@@ -1,35 +1,28 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Avatar, AvatarImage, AvatarFallback } from "~/components/ui/avatar";
-
+import { DiscordIcon } from "~/components/icons/DiscordIcon";
+import { signIn } from "next-auth/react";
 import { Button } from "~/components/ui/button";
 
-export function AuthButton() {
-  const { data: session, status } = useSession();
+const ICONS = {
+  discord: <DiscordIcon className="mr-4" fill="#ffffff" width="40" height="40"/>
+}
 
-  if (status === "authenticated") {
-    return (
-      <Avatar>
-        <button
-          onClick={async () => {
-            await signOut();
-          }}
-        >
-          <AvatarImage src={session.user.image ?? undefined} />
-          <AvatarFallback>{session.user.name}</AvatarFallback>
-        </button>
-      </Avatar>
-    );
-  }
+interface AuthButtonProps {
+  type: string,
+  className?: string
+}
 
+export function AuthButton(props: AuthButtonProps) {
   return (
     <Button
+      className={props.className}
       onClick={async () => {
-        await signIn("discord");
+        await signIn(props.type);
       }}
     >
-      Connect
+      {props.type === "discord" ? ICONS.discord : null}
+      Sign In
     </Button>
   );
 }

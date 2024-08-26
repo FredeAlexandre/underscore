@@ -1,10 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+h1, h2 {
+  @apply font-title;
+}
+
+body {
+  @apply font-body;
+  @apply text-white;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
+    --white: 0, 0%, 98%;
+    --page-background: 240 8% 9%;
+    --sidebar-background: 240 5% 12%;
+    --sidebar-item-default: 0 0% 73%;
+    --sidebar-item-background-hover: 240 5% 18%;
+    --primary-highlight: 256 68% 56%;
+    --primary-highlight-hover: 256 68% 66%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -32,7 +51,9 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 240 8% 9%;
+    --page-bg: 240 8% 9%;
+    --primary-highlight: 256 68% 56%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;

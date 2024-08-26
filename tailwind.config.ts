@@ -26,9 +26,26 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        white: "hsl(var(--white))",
+        sidebar: {
+          background: "hsl(var(--sidebar-background))",
+          item: {
+            default: "hsl(var(--sidebar-item-default))",
+            background: {
+              hover: "hsl(var(--sidebar-item-background-hover))"
+            },
+          }
+        },
+        page: {
+          background: "hsl(var(--page-background))"
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          highlight: {
+            DEFAULT: "hsl(var(--primary-highlight))",
+            hover: "hsl(var(--primary-highlight-hover))"
+          }
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -75,7 +92,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        title: "Inter",
+        body: "Montserrat",
       },
     },
   },

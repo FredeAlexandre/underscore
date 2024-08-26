@@ -5,7 +5,7 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -14,6 +14,13 @@ const config = {
       },
     ],
   },
+  webpackDevMiddleware: (config) => {
+    config.watchOptions = {
+      poll: 1000, // Check for changes every second
+      aggregateTimeout: 300, // Delay before rebuilding after the first change
+    };
+    return config;
+  },
 };
 
-export default config;
+export default nextConfig;

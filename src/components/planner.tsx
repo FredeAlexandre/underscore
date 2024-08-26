@@ -20,9 +20,9 @@ export function PlannerEventMetadata({
   include_time?: boolean;
 }) {
   return (
-    <div className="space-y-1">
-      <p className="text-sm font-bold">{title}</p>
-      <p className="text-xs text-muted-foreground">{start.toDateString()}</p>
+    <div className="h-full">
+      <p className="text-md font-bold">{title}</p>
+      <p className="text-sm text-muted-foreground">{start.toDateString()}</p>
     </div>
   );
 }
@@ -35,7 +35,7 @@ export function PlannerEventThumbnail({
   alt: string;
 }) {
   return (
-    <Image className="rounded" src={src} height={40} width={71} alt={alt} />
+    <Image className="rounded" src={src} height={70} width={120} alt={alt} />
   );
 }
 

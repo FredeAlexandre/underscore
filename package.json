@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "docker:start": "docker-compose up --build -d",
     "db:start": "docker run --name database -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
